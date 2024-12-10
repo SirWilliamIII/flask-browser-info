@@ -1,4 +1,12 @@
 from flask import Flask, request, render_template, jsonify, make_response
+from dotenv import load_dotenv
+import os
+import base64
+
+
+load_dotenv()
+encoded_key = os.getenv('PRIVATE_KEY')
+private_key = base64.b64decode(encoded_key).decode('utf-8')
 
 app = Flask(__name__)
 
@@ -29,5 +37,5 @@ def fingerprint():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, ssl_context=('cert.pem', 'key.pem'))
+    app.run(host='0.0.0.0', port=5000, debug=True)
 
